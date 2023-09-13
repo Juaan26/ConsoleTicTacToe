@@ -49,8 +49,11 @@ void board(char c[3][3]) // el bucle de esta función se encarga de iterar la ma
     {
         for (j = 0; j < 3; j++)
         {
-            printf(" %c |", c[i][j]);
+            if( j < 2){ printf(" %c |", c[i][j]);}
+            else{printf(" %c ", c[i][j]);}
+           
         }
-        printf("\n------------\n");
+        if(i< 2){printf("\n-----------\n");}
+        
     }
 }
