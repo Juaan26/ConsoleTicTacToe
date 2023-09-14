@@ -8,6 +8,7 @@ void enter_first(char c[3][3]);
 void board(char c[3][3]);
 void enter_my_values(char c[3][3]);
 void enter_IA_values(char c[3][3]);
+int winner(char c[3][3]);
 
 int main()
 {
@@ -21,22 +22,37 @@ int main()
 
 void loop(char c[3][3])
 {
-    int i;
+    int i,j;
 
     i = 0;
     enter_first(c);
-   
+
     do
     {
         system("cls");
         board(c);
-        if(i % 2 == 0){
+        if (i % 2 == 0)
+        {
             enter_my_values(c);
-        }else{enter_IA_values(c);}
-        
+        }
+        else
+        {
+            enter_IA_values(c);
+        }
+
+        j = winner (c);
         i++;
-    } while (i <= 9);
-     
+    } while (i <= 9 && j == 2);
+
+    if(j == 0){
+        printf("\n\tits a Win!!!\n");
+    }
+    if(j == 1){
+        printf("\n\tits a Lose!!!\n");
+    }
+    if(j == 2){
+        printf("\n\tIts a tie!!!\n");
+    }
 }
 
 void enter_first(char c[3][3]) // esta funcion contiene al bucle genera la matriz ( 1 2 3)
@@ -61,14 +77,13 @@ void enter_first(char c[3][3]) // esta funcion contiene al bucle genera la matri
 void enter_IA_values(char c[3][3])
 {
     int i, j, k;
-    
+
     srand(time(NULL));
 
     do
     {
         i = rand() % 3;
         j = rand() % 3;
-       
 
     } while (c[i][j] == 'X' || c[i][j] == 'O');
 
@@ -217,4 +232,106 @@ void board(char c[3][3]) // el bucle de esta función se encarga de iterar la ma
             printf("\n-----------\n");
         }
     }
+}
+int winner(char c[3][3])
+{
+    if (c[0][0] == 'X' || c[0][0] == 'O')
+    {
+        if (c[0][0] == c[0][1] && c[0][0] == c[0][2])
+        {
+            if (c[0][0] == 'X')
+            {
+                return 0; // he ganado
+            }
+            else
+            {
+                return 1;
+            } // he perdido
+        }
+
+        if (c[0][0] == c[1][0] && c[0][0] == c[2][0])
+        {
+            if (c[0][0] == 'X')
+            {
+                return 0; // he ganado
+            }
+            else
+            {
+                return 1;
+            } // he perdido
+        }
+    }
+    if (c[1][1] == 'X' || c[1][1] == 'O')
+    {
+        if (c[1][1] == c[0][1] && c[1][1] == c[2][1])
+        {
+            if (c[1][1] == 'X')
+            {
+                return 0; // he ganado
+            }
+            else
+            {
+                return 1;
+            } // he perdido
+        }
+        if (c[1][1] == c[1][0] && c[1][1] == c[1][2])
+        {
+            if (c[1][1] == 'X')
+            {
+                return 0; // he ganado
+            }
+            else
+            {
+                return 1;
+            } // he perdido
+        }
+        if (c[1][1] == c[0][0] && c[1][1] == c[2][2])
+        {
+            if (c[1][1] == 'X')
+            {
+                return 0; // he ganado
+            }
+            else
+            {
+                return 1;
+            } // he perdido
+        }
+        if (c[1][1] == c[0][2] && c[1][1] == c[2][0])
+        {
+            if (c[1][1] == 'X')
+            {
+                return 0; // he ganado
+            }
+            else
+            {
+                return 1;
+            } // he perdido
+        }
+    }
+    if (c[2][2] == 'X' || c[2][2] == 'O')
+        {
+            if (c[2][2] == c[0][2] && c[2][2] == c[1][2])
+            {
+                if (c[2][2] == 'X')
+                {
+                    return 0; // he ganado
+                }
+                else
+                {
+                    return 1;
+                } // he perdido
+            }
+             if (c[2][2] == c[2][0] && c[2][2] == c[2][1])
+            {
+                if (c[2][2] == 'X')
+                {
+                    return 0; // he ganado
+                }
+                else
+                {
+                    return 1;
+                } // he perdido
+            }
+        }
+        return 2;
 }
