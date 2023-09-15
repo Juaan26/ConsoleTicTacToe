@@ -17,12 +17,16 @@ int main()
 
     loop(c); // llama a todas las funciones fundamentales y hace un refresco de pantalla
 
+    printf("Press any key to exit...");
+    getchar();
+     getchar();
+
     return 0;
 }
 
 void loop(char c[3][3])
 {
-    int i,j;
+    int i, j;
 
     i = 0;
     enter_first(c);
@@ -40,18 +44,27 @@ void loop(char c[3][3])
             enter_IA_values(c);
         }
 
-        j = winner (c);
+        j = winner(c);
         i++;
     } while (i <= 9 && j == 2);
 
-    if(j == 0){
-        printf("\n\tits a Win!!!\n");
+    if (j == 0)
+    {
+        system("cls");
+        board(c);
+        printf("\nits a Win!!!\n");
     }
-    if(j == 1){
-        printf("\n\tits a Lose!!!\n");
+    if (j == 1)
+    {
+        system("cls");
+        board(c);
+        printf("\nits a Lose!!!\n");
     }
-    if(j == 2){
-        printf("\n\tIts a tie!!!\n");
+    if (j == 2)
+    {
+        system("cls");
+        board(c);
+        printf("\nIts a tie!!!\n");
     }
 }
 
@@ -309,29 +322,29 @@ int winner(char c[3][3])
         }
     }
     if (c[2][2] == 'X' || c[2][2] == 'O')
+    {
+        if (c[2][2] == c[0][2] && c[2][2] == c[1][2])
         {
-            if (c[2][2] == c[0][2] && c[2][2] == c[1][2])
+            if (c[2][2] == 'X')
             {
-                if (c[2][2] == 'X')
-                {
-                    return 0; // he ganado
-                }
-                else
-                {
-                    return 1;
-                } // he perdido
+                return 0; // he ganado
             }
-             if (c[2][2] == c[2][0] && c[2][2] == c[2][1])
+            else
             {
-                if (c[2][2] == 'X')
-                {
-                    return 0; // he ganado
-                }
-                else
-                {
-                    return 1;
-                } // he perdido
-            }
+                return 1;
+            } // he perdido
         }
-        return 2;
+        if (c[2][2] == c[2][0] && c[2][2] == c[2][1])
+        {
+            if (c[2][2] == 'X')
+            {
+                return 0; // he ganado
+            }
+            else
+            {
+                return 1;
+            } // he perdido
+        }
+    }
+    return 2;
 }
